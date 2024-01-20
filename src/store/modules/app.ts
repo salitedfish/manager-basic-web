@@ -3,6 +3,10 @@ import { defineStore } from 'pinia';
 import { useStorage } from "@vueuse/core";
 import defaultSettings from "@/settings";
 
+// 导入 Element Plus 中英文语言包
+import zhCn from "element-plus/es/locale/lang/zh-cn";
+import en from "element-plus/es/locale/lang/en";
+
 const useAppStore = defineStore('app', {
 
     state: () => ({
@@ -13,7 +17,8 @@ const useAppStore = defineStore('app', {
         },
         device: 'desktop',
         size: Cookies.get('size') || 'default',
-        language:useStorage("language", defaultSettings.language)
+        language:useStorage("language", defaultSettings.language),
+        locale:zhCn
     }),
     actions: {
         toggleSideBar(withoutAnimation?: boolean) {
@@ -45,8 +50,14 @@ const useAppStore = defineStore('app', {
         },
         changeLanguage(val: string) {
             this.language = val;
-            console.log("this.language:", this.language)
+            if(this.language ==='en'){
+                this.locale=en;
+            } else if(this.language ==='zh-cn'){
+                this.locale=zhCn;
+            }
+
         },
+
     },
 });
 
