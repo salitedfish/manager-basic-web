@@ -9,10 +9,13 @@ export function listTable(query: any) {
     });
 }
 // 查询db数据库列表
-export function listDbTable(query: any) {
-    return request({
-        url: '/tool/gen/db/list',
-        method: 'get',
+export function listDbTable(query: Obj): ApiPageReturn<Obj> {
+    // return request({
+    //     url: '/tool/gen/db/list',
+    //     method: 'get',
+    //     params: query,
+    // });
+    return request.get('/tool/gen/db/list', {
         params: query,
     });
 }
