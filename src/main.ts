@@ -28,6 +28,9 @@ import 'virtual:svg-icons-register';
 import SvgIcon from '@/components/SvgIcon/index.vue';
 import elementIcons from '@/components/SvgIcon/svgicon';
 
+// 国际化
+import i18n from "@/lang/index";
+
 import './permission'; // permission control
 
 import { useDict } from '@/utils/dict';
@@ -77,12 +80,13 @@ app.component('FileUpload', FileUpload);
 app.component('ImageUpload', ImageUpload);
 app.component('ImagePreview', ImagePreview);
 app.component('RightToolbar', RightToolbar);
-app.component('Editor', Editor)
+app.component('Editor', Editor);
 
 app.use(router);
 app.use(store);
 app.use(plugins);
 app.use(elementIcons);
+app.use(i18n);
 app.component('svg-icon', SvgIcon);
 
 directive(app);

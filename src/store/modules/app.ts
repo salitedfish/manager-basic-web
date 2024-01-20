@@ -1,7 +1,10 @@
 import Cookies from 'js-cookie';
 import { defineStore } from 'pinia';
+import { useStorage } from "@vueuse/core";
+import defaultSettings from "@/settings";
 
 const useAppStore = defineStore('app', {
+
     state: () => ({
         sidebar: {
             opened: Cookies.get('sidebarStatus') ? !!+(Cookies.get('sidebarStatus') ?? '') : true,
@@ -10,6 +13,7 @@ const useAppStore = defineStore('app', {
         },
         device: 'desktop',
         size: Cookies.get('size') || 'default',
+        language:useStorage("language", defaultSettings.language)
     }),
     actions: {
         toggleSideBar(withoutAnimation?: boolean) {
@@ -38,6 +42,10 @@ const useAppStore = defineStore('app', {
         },
         toggleSideBarHide(status: boolean) {
             this.sidebar.hide = status;
+        },
+        changeLanguage(val: string) {
+            this.language = val;
+            console.log("this.language:", this.language)
         },
     },
 });

@@ -1,5 +1,9 @@
 <template>
     <div class="login">
+        <!-- 顶部 -->
+        <div class="absolute top-0 flex items-center justify-end px-5 h-20 w-full">
+        <lang-select class="ml-2 cursor-pointer" />
+        </div>
         <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
             <h3 class="title">若依后台管理系统</h3>
             <el-form-item prop="username">
@@ -8,7 +12,7 @@
                     type="text"
                     size="large"
                     auto-complete="off"
-                    placeholder="账号"
+                    :placeholder="$t('login.username')"
                 >
                     <template #prefix
                         ><svg-icon icon-class="user" class="el-input__icon input-icon"
@@ -21,7 +25,7 @@
                     type="password"
                     size="large"
                     auto-complete="off"
-                    placeholder="密码"
+                    :placeholder="$t('login.password')"
                     @keyup.enter="handleLogin"
                 >
                     <template #prefix
@@ -34,7 +38,7 @@
                     v-model="loginForm.code"
                     size="large"
                     auto-complete="off"
-                    placeholder="验证码"
+                    :placeholder="$t('login.captchaCode')"
                     style="width: 63%"
                     @keyup.enter="handleLogin"
                 >
@@ -57,7 +61,7 @@
                     style="width: 100%"
                     @click.prevent="handleLogin"
                 >
-                    <span v-if="!loading">登 录</span>
+                    <span v-if="!loading">{{ $t("login.login") }}</span>
                     <span v-else>登 录 中...</span>
                 </el-button>
                 <div style="float: right" v-if="register">
@@ -74,6 +78,7 @@
 
 <script setup lang="ts">
 import { getCodeImg } from '@/api/login';
+import LangSelect from "@/components/LangSelect/index.vue";
 import Cookies from 'js-cookie';
 import { encrypt, decrypt } from '@/utils/jsencrypt';
 import useUserStore from '@/store/modules/user';
