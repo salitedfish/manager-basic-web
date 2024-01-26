@@ -18,7 +18,7 @@ const useAppStore = defineStore('app', {
         device: 'desktop',
         size: Cookies.get('size') || 'default',
         language:useStorage("language", defaultSettings.language),
-        locale:zhCn
+        locale:defaultSettings.language==='en'?en:zhCn
     }),
     actions: {
         toggleSideBar(withoutAnimation?: boolean) {

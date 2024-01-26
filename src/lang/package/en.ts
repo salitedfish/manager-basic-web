@@ -9,6 +9,12 @@ export default {
         username: "Username",
         password: "Password",
         login: "Login",
+        logining: "logining",
+        remember: "remember password",
+        register: "Register Now",
+        PlsUsername: "Please enter your account",
+        PlsPassword: "Please enter your password",
+        PlsCaptchaCode: "Please enter the verification code",
         captchaCode: "Verify Code",
     },
     // 导航栏国际化

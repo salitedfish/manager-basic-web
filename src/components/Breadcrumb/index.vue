@@ -5,9 +5,9 @@
                 <span
                     v-if="item.redirect === 'noRedirect' || index == levelList.length - 1"
                     class="no-redirect"
-                    >{{ item.meta.title }}</span
+                    >{{ translateRouteTitle(item.meta.title) }}</span
                 >
-                <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+                <a v-else @click.prevent="handleLink(item)">{{ translateRouteTitle(item.meta.title) }}</a>
             </el-breadcrumb-item>
         </transition-group>
     </el-breadcrumb>
@@ -16,6 +16,7 @@
 <script setup lang="ts">
 import { ref, watchEffect } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
+import { translateRouteTitle } from "@/utils/i18n";
 
 const route = useRoute();
 const router = useRouter();

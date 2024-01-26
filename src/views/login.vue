@@ -5,7 +5,7 @@
         <lang-select class="ml-2 cursor-pointer" />
         </div>
         <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
-            <h3 class="title">若依后台管理系统</h3>
+            <h3 class="title">{{ $t("login.title") }}</h3>
             <el-form-item prop="username">
                 <el-input
                     v-model="loginForm.username"
@@ -51,7 +51,7 @@
                 </div>
             </el-form-item>
             <el-checkbox v-model="loginForm.rememberMe" style="margin: 0px 0px 25px 0px"
-                >记住密码</el-checkbox
+                >{{ $t("login.remember") }}</el-checkbox
             >
             <el-form-item style="width: 100%">
                 <el-button
@@ -62,10 +62,10 @@
                     @click.prevent="handleLogin"
                 >
                     <span v-if="!loading">{{ $t("login.login") }}</span>
-                    <span v-else>登 录 中...</span>
+                    <span v-else>{{ $t("login.logining") }}</span>
                 </el-button>
                 <div style="float: right" v-if="register">
-                    <router-link class="link-type" :to="'/register'">立即注册</router-link>
+                    <router-link class="link-type" :to="'/register'">{{ $t("login.register") }}</router-link>
                 </div>
             </el-form-item>
         </el-form>
@@ -78,6 +78,7 @@
 
 <script setup lang="ts">
 import { getCodeImg } from '@/api/login';
+import { useI18n } from "vue-i18n";
 import LangSelect from "@/components/LangSelect/index.vue";
 import Cookies from 'js-cookie';
 import { encrypt, decrypt } from '@/utils/jsencrypt';
@@ -86,6 +87,7 @@ import { useRouter } from 'vue-router';
 import { FormInstance } from 'element-plus';
 import { ref } from 'vue';
 
+const { t } = useI18n();
 const userStore = useUserStore();
 const router = useRouter();
 const loginForm = ref<any>({
@@ -97,9 +99,9 @@ const loginForm = ref<any>({
 });
 
 const loginRules = {
-    username: [{ required: true, trigger: 'blur', message: '请输入您的账号' }],
-    password: [{ required: true, trigger: 'blur', message: '请输入您的密码' }],
-    code: [{ required: true, trigger: 'change', message: '请输入验证码' }],
+    username: [{ required: true, trigger: 'blur', message:`${t("login.PlsUsername")}`}],
+    password: [{ required: true, trigger: 'blur', message:`${t("login.PlsPassword")}` }],
+    code: [{ required: true, trigger: 'change', message: `${t("login.PlsCaptchaCode")}` }],
 };
 
 const codeUrl = ref('');
