@@ -18,8 +18,10 @@ const useAppStore = defineStore('app', {
         device: 'desktop',
         size: Cookies.get('size') || 'default',
         language:useStorage("language", defaultSettings.language),
-        locale:defaultSettings.language==='en'?en:zhCn
+
+        locale:Cookies.get('language')==='en'?en:zhCn
     }),
+
     actions: {
         toggleSideBar(withoutAnimation?: boolean) {
             if (this.sidebar.hide) {
@@ -50,12 +52,7 @@ const useAppStore = defineStore('app', {
         },
         changeLanguage(val: string) {
             this.language = val;
-            if(this.language ==='en'){
-                this.locale=en;
-            } else if(this.language ==='zh-cn'){
-                this.locale=zhCn;
-            }
-
+            Cookies.set('language', val);
         },
 
     },

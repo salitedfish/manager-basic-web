@@ -15,6 +15,7 @@ function handleLanguageChange(lang: string) {
     } else {
         ElMessage.success("切换语言成功！");
     }
+    window.location.reload();
 }
 </script>
 
