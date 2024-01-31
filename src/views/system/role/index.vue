@@ -132,7 +132,7 @@
                             @click="handleDelete(scope.row)"
                         ></el-button>
                     </el-tooltip>
-                    <el-tooltip v-if="scope.row.roleId !== 1" content="数据权限" placement="top">
+                    <!-- <el-tooltip v-if="scope.row.roleId !== 1" content="数据权限" placement="top">
                         <el-button
                             v-hasPermi="['system:role:edit']"
                             link
@@ -140,7 +140,7 @@
                             icon="CircleCheck"
                             @click="handleDataScope(scope.row)"
                         ></el-button>
-                    </el-tooltip>
+                    </el-tooltip> -->
                     <el-tooltip v-if="scope.row.roleId !== 1" content="分配用户" placement="top">
                         <el-button
                             v-hasPermi="['system:role:edit']"

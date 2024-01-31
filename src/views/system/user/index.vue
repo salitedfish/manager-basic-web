@@ -209,7 +209,7 @@
                     <el-table-column
                         label="操作"
                         align="center"
-                        width="150"
+                        width="180"
                         class-name="small-padding fixed-width"
                     >
                         <template #default="scope">
@@ -247,6 +247,15 @@
                                     type="primary"
                                     icon="CircleCheck"
                                     @click="handleAuthRole(scope.row)"
+                                ></el-button>
+                            </el-tooltip>
+                            <el-tooltip v-if="scope.row.userId !== 1" content="分配业务权限" placement="top">
+                                <el-button
+                                    v-hasPermi="['system:business:edit']"
+                                    link
+                                    type="primary"
+                                    icon="Position"
+                                    @click="handleAuthBusiness(scope.row)"
                                 ></el-button>
                             </el-tooltip>
                         </template>
@@ -437,6 +446,7 @@
 <script setup name="User" lang="ts">
 /* eslint-disable camelcase */
 import { getToken } from '@/utils/auth';
+import baseSelectpage from '@/components/VSelectpage/index.vue';
 import {
     changeUserStatus,
     listUser,
@@ -631,6 +641,11 @@ function handleCommand(command: any, row: any) {
 function handleAuthRole(row: any) {
     const userId = row.userId;
     router.push('/system/user-auth/role/' + userId);
+}
+/** 跳转业务权限分配 */
+function handleAuthBusiness(row: any) {
+    const userId = row.userId;
+    router.push('/system/business-auth/business/' + userId +"/1");
 }
 /** 重置密码按钮操作 */
 function handleResetPwd(row: any) {

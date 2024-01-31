@@ -17,6 +17,14 @@ export function listDeptExcludeChild(deptId: any) {
     });
 }
 
+// 查询包含人员的部门树
+export function listDeptTreeWithUser() {
+    return request({
+        url: '/system/dept/treeWithUser',
+        method: 'get',
+    });
+}
+
 // 查询部门详细
 export function getDept(deptId: any) {
     return request({
@@ -50,3 +58,4 @@ export function delDept(deptId: any) {
         method: 'delete',
     });
 }
+

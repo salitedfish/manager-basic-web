@@ -135,6 +135,20 @@ export const dynamicRoutes : RouteRecordRaw[]= [
         ],
     },
     {
+        path: '/system/business-auth',
+        component: Layout,
+        hidden: true,
+        permissions: ['system:business:edit'],
+        children: [
+            {
+                path: 'business/:orgId(\\d+)/:orgType(\\d+)',
+                component: () => import('@/views/system/role/authBusiness.vue'),
+                name: 'AuthBusiness',
+                meta: { title: '分配业务权限', activeMenu: '/system/role' },
+            },
+        ],
+    },
+    {
         path: '/system/dict-data',
         component: Layout,
         hidden: true,
