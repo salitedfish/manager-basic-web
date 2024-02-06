@@ -117,8 +117,8 @@
                 <template #default="scope">
                     <el-switch
                         v-model="scope.row.status"
-                        active-value="0"
-                        inactive-value="1"
+                        active-value="1"
+                        inactive-value="0"
                         @change="handleStatusChange(scope.row)"
                     ></el-switch>
                 </template>
@@ -412,7 +412,7 @@ function reset() {
         cronExpression: undefined,
         misfirePolicy: 1,
         concurrent: 1,
-        status: '0',
+        status: '1',
     };
     proxy!.resetForm('jobRef');
 }
@@ -450,7 +450,7 @@ function handleCommand(command: any, row: any) {
 }
 // 任务状态修改
 function handleStatusChange(row: any) {
-    let text = row.status === '0' ? '启用' : '停用';
+    let text = row.status === '1' ? '启用' : '停用';
     proxy!.$modal
         .confirm('确认要"' + text + '""' + row.jobName + '"任务吗?')
         .then(function () {

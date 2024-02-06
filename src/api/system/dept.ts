@@ -18,10 +18,11 @@ export function listDeptExcludeChild(deptId: any) {
 }
 
 // 查询包含人员的部门树
-export function listDeptTreeWithUser() {
+export function listDeptTreeWithUser(data?:any) {
     return request({
         url: '/system/dept/treeWithUser',
         method: 'get',
+        params: data,
     });
 }
 
@@ -59,3 +60,30 @@ export function delDept(deptId: any) {
     });
 }
 
+
+// 新增部门关联的角色列表
+export function addDeptRole(data: any) {
+    return request({
+        url: '/system/dept/role/add',
+        method: 'post',
+        data: data,
+    });
+}
+
+// 删除部门关联的角色列表
+export function delDeptRole(data: any) {
+    return request({
+        url: '/system/dept/role/delete',
+        method: 'delete',
+        data: data,
+    });
+}
+
+// 查询部门关联的角色列表
+export function listDeptRole(query?: any) {
+    return request({
+        url: '/system/dept/role/list',
+        method: 'get',
+        params: query,
+    });
+}

@@ -443,7 +443,7 @@
     </div>
 </template>
 
-<script setup name="User" lang="ts">
+<script setup name="subAdminUser" lang="ts">
 /* eslint-disable camelcase */
 import { getToken } from '@/utils/auth';
 import {
@@ -451,7 +451,7 @@ import {
     listUser,
     resetUserPwd,
     delUser,
-    getUser,
+    getsubAdminUser,
     updateUser,
     addUser,
     deptTreeSelect,
@@ -520,6 +520,7 @@ const data = reactive<{
         phonenumber: undefined,
         status: undefined,
         deptId: undefined,
+        subAdmin: 'true',
     },
     rules: {
         userName: [
@@ -551,7 +552,7 @@ watch(deptName, val => {
 });
 /** 查询部门下拉树结构 */
 function getDeptTree() {
-    deptTreeSelect().then(response => {
+    deptTreeSelect({subAdmin: 'true',}).then(response => {
         deptOptions.value = response.data;
     });
 }
@@ -639,10 +640,9 @@ function handleCommand(command: any, row: any) {
 /** 跳转角色分配 */
 function handleAuthRole(row: any) {
     const userId = row.userId;
-    // router.push('/system/user-auth/role/' + userId);
     router.push({
         name: 'AuthRole',
-        query: { userId: userId},
+        query: { userId: userId,subAdmin:'true'},
     });
 }
 
@@ -652,7 +652,7 @@ function handleAuthBusiness(row: any) {
    // router.push('/system/business-auth/business/' + userId +"/1");
     router.push({
         name: 'AuthBusiness',
-        query: { orgId: Id , orgType: '1'},
+        query: { orgId: Id , orgType: '1',subAdmin:'true'},
     });
 }
 /** 重置密码按钮操作 */
@@ -726,6 +726,7 @@ function reset() {
         remark: undefined,
         postIds: [],
         roleIds: [],
+        subAdmin: 'true',
     };
     proxy!.resetForm('userRef');
 }
@@ -737,7 +738,7 @@ function cancel() {
 /** 新增按钮操作 */
 function handleAdd() {
     reset();
-    getUser().then((response: any) => {
+    getsubAdminUser().then((response: any) => {
         postOptions.value = response.posts;
         roleOptions.value = response.roles;
         open.value = true;
@@ -749,7 +750,7 @@ function handleAdd() {
 function handleUpdate(row: any) {
     reset();
     const userId = row.userId || ids.value;
-    getUser(userId).then((response: any) => {
+    getsubAdminUser(userId).then((response: any) => {
         form.value = response.data;
         postOptions.value = response.posts;
         roleOptions.value = response.roles;

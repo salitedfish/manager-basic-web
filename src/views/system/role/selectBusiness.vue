@@ -1,6 +1,6 @@
 <template>
     <!-- 授权用户 -->
-    <el-dialog v-model="visible" title="新增业务权限" width="500px" top="5vh" append-to-body>
+    <el-dialog v-model="visible" title="新增业务权限" width="550px" top="5vh" append-to-body>
         <el-form ref="business" :model="form" label-width="120px" :rules="rules" :inline="true">
             <el-form-item label="业务权限名称" prop="businessId">
                 <el-select v-model="form.businessId" clearable filterable placeholder="请选择">
@@ -8,7 +8,7 @@
                         :value="item.businessId" ></el-option>
                 </el-select>
             </el-form-item>
-            <el-form-item label="数据权限范围">
+            <el-form-item label="数据权限范围" >
                 <el-checkbox v-model="menuExpand" @change="handleCheckedTreeExpand($event, 'menu')">展开/折叠</el-checkbox>
                 <el-checkbox v-model="menuNodeAll" @change="handleCheckedTreeNodeAll($event, 'menu')">全选/全不选</el-checkbox>
                 <el-checkbox v-model="form.menuCheckStrictly"
@@ -27,7 +27,7 @@
     </el-dialog>
 </template>
 
-<script setup name="Role" lang="ts">
+<script setup name="selectBusiness" lang="ts">
 
 import { listBusiness, addBusinessAuth } from '@/api/system/business';
 import { listDeptTreeWithUser } from '@/api/system/dept';
@@ -53,6 +53,9 @@ const props = defineProps({
         type: [Number, String],
     },
     orgType: {
+        type: [Number, String],
+    },
+    subAdmin: {
         type: [Number, String],
     },
 });
@@ -85,7 +88,7 @@ function show() {
 /** 查询业务权限 */
 function getList() {
     loading.value = true;
-    listBusiness().then((response: any) => {
+    listBusiness({subAdmin:props.subAdmin?props.subAdmin:undefined}).then((response: any) => {
         businessList.value = response.rows;
         total.value = response.total;
         loading.value = false;
@@ -95,7 +98,7 @@ function getList() {
 
 /** 查询部门以及人 */
 function getMenuTreeselect() {
-    listDeptTreeWithUser().then(response => {
+    listDeptTreeWithUser({subAdmin:props.subAdmin?props.subAdmin:undefined}).then(response => {
         menuOptions.value = response.data;
     });
 }
@@ -175,6 +178,7 @@ function submitForm() {
                     businessId: form.value.businessId,
                     orgId: props.orgId,
                     orgType: props.orgType,
+                    subAdmin:props.subAdmin?props.subAdmin:undefined
                 })
             });
             addBusinessAuth(params).then((res: any) => {

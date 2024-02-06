@@ -2,31 +2,17 @@
     <div class="app-container">
         <el-form v-show="showSearch" ref="queryRef" :model="queryParams" :inline="true">
             <el-form-item label="岗位编码" prop="postCode">
-                <el-input
-                    v-model="queryParams.postCode"
-                    placeholder="请输入岗位编码"
-                    clearable
-                    style="width: 200px"
-                    @keyup.enter="handleQuery"
-                />
+                <el-input v-model="queryParams.postCode" placeholder="请输入岗位编码" clearable style="width: 200px"
+                    @keyup.enter="handleQuery" />
             </el-form-item>
             <el-form-item label="岗位名称" prop="postName">
-                <el-input
-                    v-model="queryParams.postName"
-                    placeholder="请输入岗位名称"
-                    clearable
-                    style="width: 200px"
-                    @keyup.enter="handleQuery"
-                />
+                <el-input v-model="queryParams.postName" placeholder="请输入岗位名称" clearable style="width: 200px"
+                    @keyup.enter="handleQuery" />
             </el-form-item>
             <el-form-item label="状态" prop="status">
                 <el-select v-model="queryParams.status" placeholder="岗位状态" clearable style="width: 200px">
-                    <el-option
-                        v-for="dict in sys_normal_disable"
-                        :key="dict.value"
-                        :label="dict.label"
-                        :value="dict.value"
-                    />
+                    <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label"
+                        :value="dict.value" />
                 </el-select>
             </el-form-item>
             <el-form-item>
@@ -37,46 +23,20 @@
 
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
-                <el-button
-                    v-hasPermi="['system:post:add']"
-                    type="primary"
-                    plain
-                    icon="Plus"
-                    @click="handleAdd"
-                    >新增</el-button
-                >
+                <el-button v-hasPermi="['system:post:add']" type="primary" plain icon="Plus"
+                    @click="handleAdd">新增</el-button>
             </el-col>
             <el-col :span="1.5">
-                <el-button
-                    v-hasPermi="['system:post:edit']"
-                    type="success"
-                    plain
-                    icon="Edit"
-                    :disabled="single"
-                    @click="handleUpdate"
-                    >修改</el-button
-                >
+                <el-button v-hasPermi="['system:post:edit']" type="success" plain icon="Edit" :disabled="single"
+                    @click="handleUpdate">修改</el-button>
             </el-col>
             <el-col :span="1.5">
-                <el-button
-                    v-hasPermi="['system:post:remove']"
-                    type="danger"
-                    plain
-                    icon="Delete"
-                    :disabled="multiple"
-                    @click="handleDelete"
-                    >删除</el-button
-                >
+                <el-button v-hasPermi="['system:post:remove']" type="danger" plain icon="Delete" :disabled="multiple"
+                    @click="handleDelete">删除</el-button>
             </el-col>
             <el-col :span="1.5">
-                <el-button
-                    v-hasPermi="['system:post:export']"
-                    type="warning"
-                    plain
-                    icon="Download"
-                    @click="handleExport"
-                    >导出</el-button
-                >
+                <el-button v-hasPermi="['system:post:export']" type="warning" plain icon="Download"
+                    @click="handleExport">导出</el-button>
             </el-col>
             <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
         </el-row>
@@ -99,33 +59,20 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
-                    <el-button
-                        v-hasPermi="['system:post:edit']"
-                        link
-                        type="primary"
-                        icon="Edit"
-                        @click="handleUpdate(scope.row)"
-                        >修改</el-button
-                    >
-                    <el-button
-                        v-hasPermi="['system:post:remove']"
-                        link
-                        type="primary"
-                        icon="Delete"
-                        @click="handleDelete(scope.row)"
-                        >删除</el-button
-                    >
+                    <el-button v-hasPermi="['system:post:edit']" link type="primary" icon="Edit"
+                        @click="handleUpdate(scope.row)">修改</el-button>
+                    <el-button v-hasPermi="['system:dept:add']" link type="primary" icon="Position"
+                        @click="handleAuthBusiness(scope.row)">分配业务权限</el-button>
+                    <el-button v-hasPermi="['system:role:edit']" link type="primary" icon="User"
+                        @click="handleAuthUser(scope.row)">分配角色</el-button>
+                    <el-button v-hasPermi="['system:post:remove']" link type="primary" icon="Delete"
+                        @click="handleDelete(scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
 
-        <pagination
-            v-show="total > 0"
-            v-model:page="queryParams.pageNum"
-            v-model:limit="queryParams.pageSize"
-            :total="total"
-            @pagination="getList"
-        />
+        <pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
+            :total="total" @pagination="getList" />
 
         <!-- 添加或修改岗位对话框 -->
         <el-dialog v-model="open" :title="title" width="500px" append-to-body>
@@ -165,7 +112,9 @@
 import { listPost, addPost, delPost, getPost, updatePost } from '@/api/system/post';
 import { parseTime } from '@/utils/ruoyi';
 import { getCurrentInstance, ComponentInternalInstance, ref, reactive, toRefs } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 
 const { sys_normal_disable } = proxy!.useDict('sys_normal_disable');
@@ -216,6 +165,14 @@ function cancel() {
     open.value = false;
     reset();
 }
+
+/** 分配用户 */
+function handleAuthUser(row: any) {
+    router.push({
+        name: 'AuthPostUser',
+        query: { Id: row.postId , Name: row.postName},
+    });
+}
 /** 表单重置 */
 function reset() {
     form.value = {
@@ -223,10 +180,18 @@ function reset() {
         postCode: undefined,
         postName: undefined,
         postSort: 0,
-        status: '0',
+        status: '1',
         remark: undefined,
     };
     proxy!.resetForm('postRef');
+}
+/** 跳转业务权限分配 */
+function handleAuthBusiness(row: any) {
+    const Id = row.deptId;
+    router.push({
+        name: 'AuthBusiness',
+        query: { orgId: Id, orgType: '2' },
+    });
 }
 /** 搜索按钮操作 */
 function handleQuery() {

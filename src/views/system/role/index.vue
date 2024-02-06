@@ -101,8 +101,8 @@
                 <template #default="scope">
                     <el-switch
                         v-model="scope.row.status"
-                        active-value="0"
-                        inactive-value="1"
+                        active-value="1"
+                        inactive-value="0"
                         @change="handleStatusChange(scope.row)"
                     ></el-switch>
                 </template>
@@ -408,7 +408,7 @@ function handleSelectionChange(selection: any[]) {
 }
 /** 角色状态修改 */
 function handleStatusChange(row: any) {
-    let text = row.status === '0' ? '启用' : '停用';
+    let text = row.status === '1' ? '启用' : '停用';
     proxy!.$modal
         .confirm('确认要"' + text + '""' + row.roleName + '"角色吗?')
         .then(function () {
@@ -467,7 +467,7 @@ function reset() {
         roleName: undefined,
         roleKey: undefined,
         roleSort: 0,
-        status: '0',
+        status: '1',
         menuIds: [],
         deptIds: [],
         menuCheckStrictly: true,

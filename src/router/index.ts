@@ -113,7 +113,7 @@ export const dynamicRoutes : RouteRecordRaw[]= [
         permissions: ['system:user:edit'],
         children: [
             {
-                path: 'role/:userId(\\d+)',
+                path: 'authRole',
                 component: () => import('@/views/system/user/authRole.vue'),
                 name: 'AuthRole',
                 meta: { title: '分配角色', activeMenu: '/system/user' },
@@ -132,6 +132,8 @@ export const dynamicRoutes : RouteRecordRaw[]= [
                 name: 'AuthUser',
                 meta: { title: '分配用户', activeMenu: '/system/role' },
             },
+
+
         ],
     },
     {
@@ -141,10 +143,38 @@ export const dynamicRoutes : RouteRecordRaw[]= [
         permissions: ['system:business:edit'],
         children: [
             {
-                path: 'business/:orgId(\\d+)/:orgType(\\d+)',
+                path: 'business',
                 component: () => import('@/views/system/role/authBusiness.vue'),
                 name: 'AuthBusiness',
-                meta: { title: '分配业务权限', activeMenu: '/system/role' },
+                meta: { title: '分配业务权限', },
+            },
+        ],
+    },
+    {
+        path: '/system/dept-user-auth',
+        component: Layout,
+        hidden: true,
+        permissions: ['system:deptUser:edit'],
+        children: [
+            {
+                path: 'deptUser',
+                component: () => import('@/views/system/dept/authDeptUser.vue'),
+                name: 'AuthDeptUser',
+                meta: { title: '分配角色', activeMenu: '/system/dept' },
+            },
+        ],
+    },
+    {
+        path: '/system/post-user-auth',
+        component: Layout,
+        hidden: true,
+        permissions: ['system:postUser:edit'],
+        children: [
+            {
+                path: 'postUser',
+                component: () => import('@/views/system/post/authPostUser.vue'),
+                name: 'AuthPostUser',
+                meta: { title: '分配角色', activeMenu: '/system/post' },
             },
         ],
     },

@@ -42,3 +42,29 @@ export function delPost(postId: any) {
         method: 'delete',
     });
 }
+// 新增岗位关联的角色列表
+export function addPostRole(data: any) {
+    return request({
+        url: '/system/post/role/add',
+        method: 'post',
+        data: data,
+    });
+}
+
+// 删除岗位关联的角色列表
+export function delPostRole(data: any) {
+    return request({
+        url: '/system/post/role/delete',
+        method: 'delete',
+        data: data,
+    });
+}
+
+// 查询岗位关联的角色列表
+export function listPostRole(query?: any) {
+    return request({
+        url: '/system/post/role/list',
+        method: 'get',
+        params: query,
+    });
+}

@@ -2,22 +2,13 @@
     <div class="app-container">
         <el-form v-show="showSearch" ref="queryRef" :model="queryParams" :inline="true">
             <el-form-item label="部门名称" prop="deptName">
-                <el-input
-                    v-model="queryParams.deptName"
-                    placeholder="请输入部门名称"
-                    clearable
-                    style="width: 200px"
-                    @keyup.enter="handleQuery"
-                />
+                <el-input v-model="queryParams.deptName" placeholder="请输入部门名称" clearable style="width: 200px"
+                    @keyup.enter="handleQuery" />
             </el-form-item>
             <el-form-item label="状态" prop="status">
                 <el-select v-model="queryParams.status" placeholder="部门状态" clearable style="width: 200px">
-                    <el-option
-                        v-for="dict in sys_normal_disable"
-                        :key="dict.value"
-                        :label="dict.label"
-                        :value="dict.value"
-                    />
+                    <el-option v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.label"
+                        :value="dict.value" />
                 </el-select>
             </el-form-item>
             <el-form-item>
@@ -28,14 +19,8 @@
 
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
-                <el-button
-                    v-hasPermi="['system:dept:add']"
-                    type="primary"
-                    plain
-                    icon="Plus"
-                    @click="handleAdd"
-                    >新增</el-button
-                >
+                <el-button v-hasPermi="['system:dept:add']" type="primary" plain icon="Plus"
+                    @click="handleAdd">新增</el-button>
             </el-col>
             <el-col :span="1.5">
                 <el-button type="info" plain icon="Sort" @click="toggleExpandAll">展开/折叠</el-button>
@@ -43,14 +28,8 @@
             <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
         </el-row>
 
-        <el-table
-            v-if="refreshTable"
-            v-loading="loading"
-            :data="deptList"
-            row-key="deptId"
-            :default-expand-all="isExpandAll"
-            :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
-        >
+        <el-table v-if="refreshTable" v-loading="loading" :data="deptList" row-key="deptId"
+            :default-expand-all="isExpandAll" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
             <el-table-column prop="deptName" label="部门名称" width="260"></el-table-column>
             <el-table-column prop="orderNum" label="排序" width="200"></el-table-column>
             <el-table-column prop="status" label="状态" width="100">
@@ -65,31 +44,16 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
-                    <el-button
-                        v-hasPermi="['system:dept:edit']"
-                        link
-                        type="primary"
-                        icon="Edit"
-                        @click="handleUpdate(scope.row)"
-                        >修改</el-button
-                    >
-                    <el-button
-                        v-hasPermi="['system:dept:add']"
-                        link
-                        type="primary"
-                        icon="Plus"
-                        @click="handleAdd(scope.row)"
-                        >新增</el-button
-                    >
-                    <el-button
-                        v-if="scope.row.parentId != 0"
-                        v-hasPermi="['system:dept:remove']"
-                        link
-                        type="primary"
-                        icon="Delete"
-                        @click="handleDelete(scope.row)"
-                        >删除</el-button
-                    >
+                    <el-button v-hasPermi="['system:dept:edit']" link type="primary" icon="Edit"
+                        @click="handleUpdate(scope.row)">修改</el-button>
+                    <el-button v-hasPermi="['system:dept:add']" link type="primary" icon="Plus"
+                        @click="handleAdd(scope.row)">新增</el-button>
+                    <el-button v-hasPermi="['system:dept:add']" link type="primary" icon="Position"
+                        @click="handleAuthBusiness(scope.row)">分配业务权限</el-button>
+                    <el-button v-hasPermi="['system:role:edit']" link type="primary" icon="User"
+                        @click="handleAuthUser(scope.row)">分配角色</el-button>
+                    <el-button v-if="scope.row.parentId != 0" v-hasPermi="['system:dept:remove']" link type="primary"
+                        icon="Delete" @click="handleDelete(scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -100,14 +64,9 @@
                 <el-row>
                     <el-col v-if="form.parentId !== 0" :span="24">
                         <el-form-item label="上级部门" prop="parentId">
-                            <el-tree-select
-                                v-model="form.parentId"
-                                :data="deptOptions"
-                                :props="{ value: 'deptId', label: 'deptName', children: 'children' }"
-                                value-key="deptId"
-                                placeholder="选择上级部门"
-                                check-strictly
-                            />
+                            <el-tree-select v-model="form.parentId" :data="deptOptions"
+                                :props="{ value: 'deptId', label: 'deptName', children: 'children' }" value-key="deptId"
+                                placeholder="选择上级部门" check-strictly />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -138,12 +97,8 @@
                     <el-col :span="12">
                         <el-form-item label="部门状态">
                             <el-radio-group v-model="form.status">
-                                <el-radio
-                                    v-for="dict in sys_normal_disable"
-                                    :key="dict.value"
-                                    :label="dict.value"
-                                    >{{ dict.label }}</el-radio
-                                >
+                                <el-radio v-for="dict in sys_normal_disable" :key="dict.value" :label="dict.value">{{
+                                    dict.label }}</el-radio>
                             </el-radio-group>
                         </el-form-item>
                     </el-col>
@@ -164,7 +119,9 @@
 import { listDept, getDept, delDept, addDept, updateDept, listDeptExcludeChild } from '@/api/system/dept';
 import { parseTime } from '@/utils/ruoyi';
 import { getCurrentInstance, ComponentInternalInstance, ref, reactive, toRefs, nextTick } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 const { sys_normal_disable } = proxy!.useDict('sys_normal_disable');
 
@@ -223,7 +180,7 @@ function reset() {
         leader: undefined,
         phone: undefined,
         email: undefined,
-        status: '0',
+        status: '1',
     };
     proxy!.resetForm('deptRef');
 }
@@ -236,6 +193,13 @@ function resetQuery() {
     proxy!.resetForm('queryRef');
     handleQuery();
 }
+/** 分配用户 */
+function handleAuthUser(row: any) {
+    router.push({
+        name: 'AuthDeptUser',
+        query: { Id: row.deptId , Name: row.deptName},
+    });
+}
 /** 新增按钮操作 */
 function handleAdd(row: any) {
     reset();
@@ -247,6 +211,15 @@ function handleAdd(row: any) {
     }
     open.value = true;
     title.value = '添加部门';
+}
+/** 跳转业务权限分配 */
+function handleAuthBusiness(row: any) {
+    const Id = row.deptId;
+    // router.push('/system/business-auth/business/' + Id + "/0");
+    router.push({
+        name: 'AuthBusiness',
+        query: { orgId: Id, orgType: '0' },
+    });
 }
 /** 展开/折叠操作 */
 function toggleExpandAll() {

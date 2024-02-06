@@ -17,14 +17,9 @@
         </el-form>
 
         <h4 class="form-header h4">角色信息</h4>
-        <el-table
-            ref="roleRef"
-            v-loading="loading"
-            :row-key="getRowKey"
-            :data="roles.slice((pageNum - 1) * pageSize, pageNum * pageSize)"
-            @rowClick="clickRow"
-            @selectionChange="handleSelectionChange"
-        >
+        <el-table ref="roleRef" v-loading="loading" :row-key="getRowKey"
+            :data="roles.slice((pageNum - 1) * pageSize, pageNum * pageSize)" @rowClick="clickRow"
+            @selectionChange="handleSelectionChange">
             <el-table-column label="序号" width="55" type="index" align="center">
                 <template #default="scope">
                     <span>{{ (pageNum - 1) * pageSize + scope.$index + 1 }}</span>
@@ -87,24 +82,36 @@ function getRowKey(row: any) {
 }
 /** 关闭按钮 */
 function close() {
-    const obj = { path: '/system/user' };
+    const obj = route.query.subAdmin ? { path: '/system/subAdminUser' } : { path: '/system/user' };
     proxy!.$tab.closeOpenPage(obj);
 }
 /** 提交按钮 */
 function submitForm() {
     const userId = form.value.userId;
     const rIds = roleIds.value.join(',');
-    updateAuthRole({ userId: userId, roleIds: rIds }).then(response => {
+    let params;
+    if (!route.query.subAdmin) {
+         params = {
+            userId: userId, roleIds: rIds
+        }
+    }else{
+        params = {
+            userId: userId, roleIds: rIds,subAdmin:'true'
+        }
+    }
+
+    updateAuthRole(params).then(response => {
         proxy!.$modal.msgSuccess('授权成功');
         close();
     });
 }
 
 (() => {
-    const userId = route.params && route.params.userId;
+    const userId = route.query && route.query.userId;
+
     if (userId) {
         loading.value = true;
-        getAuthRole(userId).then((response: any) => {
+        getAuthRole(userId, route.query.subAdmin ? { subAdmin: 'true' } : null).then((response: any) => {
             form.value = response.user;
             roles.value = response.roles;
             total.value = roles.value.length;

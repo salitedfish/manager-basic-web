@@ -27,10 +27,11 @@ export function delBusinessAuth(roleIds: any) {
 }
 
 // 查询业务权限列表
-export function listBusiness() {
+export function listBusiness(query?: any) {
     return request({
         url: '/system/business/list',
         method: 'get',
+        params:query,
     });
 }
 
