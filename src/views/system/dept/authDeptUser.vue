@@ -62,7 +62,7 @@
 
         <pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
             :total="total" @pagination="getList" />
-        <select-role ref="selectRef" :deptId="queryParams.deptId" @ok="handleAddDeptRole" />
+        <select-role ref="selectRef" :deptId="queryParams.deptId" @ok="handleAddDeptRole" :subAdmin="queryParams.subAdmin"/>
     </div>
 </template>
 
@@ -91,12 +91,14 @@ const queryParams = reactive<{
     deptId: any;
     roleName: any;
     roleKey: any;
+    subAdmin: any;
 }>({
     pageNum: 1,
     pageSize: 10,
     deptId: route.query.Id,
     roleName: undefined,
     roleKey: undefined,
+    subAdmin: route.query.subAdmin?route.query.subAdmin:undefined,
 });
 
 /** 查询授权角色列表 */
@@ -110,7 +112,13 @@ function getList() {
 }
 // 返回按钮
 function handleClose() {
-    const obj = { path: '/system/dept' };
+    let obj
+    if(queryParams.subAdmin=='true'){
+        obj = { path: '/system/subAdminDept' };
+    }else{
+        obj = { path: '/system/dept' };
+    }
+
     proxy!.$tab.closeOpenPage(obj);
 }
 /** 搜索按钮操作 */
@@ -124,6 +132,7 @@ async function handleAddDeptRole(roleIds: any) {
     const params={
         roleIds:roleIds,
         deptId:route.query.Id,
+        subAdmin:true
     }
     await addDeptRole(params)
     queryParams.pageNum = 1;

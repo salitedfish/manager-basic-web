@@ -115,6 +115,7 @@ const closeOjb=[
 { path: '/system/user' },
 { path: '/system/post' },
 { path: '/system/subAdminUser' },
+{ path: '/system/subAdminDept' },
 ]
 const queryParams = reactive<{
     pageNum: number;
@@ -146,6 +147,8 @@ function handleClose() {
     let obj
     if(queryParams.orgType ==1 && queryParams.subAdmin=='true'){
         obj = closeOjb[3];
+    }else if(queryParams.orgType ==0 && queryParams.subAdmin=='true'){
+        obj = closeOjb[4];
     }else{
         obj = closeOjb[queryParams.orgType];
     }

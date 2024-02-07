@@ -67,6 +67,13 @@ const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 
 const { sys_normal_disable } = proxy!.useDict('sys_normal_disable');
 
+const props = defineProps({
+
+    subAdmin: {
+        type: [Number, String],
+    },
+});
+
 const List = ref<any[]>([]);
 const visible = ref(false);
 const total = ref(0);
@@ -79,6 +86,7 @@ const queryParams = reactive<{
     roleName: any;
     phonenumber: any;
     status: any;
+    subAdmin: any;
 }>({
     pageNum: 1,
     pageSize: 10,
@@ -86,6 +94,7 @@ const queryParams = reactive<{
     roleName: undefined,
     phonenumber: undefined,
     status: '1',
+    subAdmin: props.subAdmin?props.subAdmin:undefined,
 });
 
 // 显示弹框
