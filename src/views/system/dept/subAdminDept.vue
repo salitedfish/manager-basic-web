@@ -75,6 +75,16 @@
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
+                        <el-form-item label="部门编号" prop="deptCode">
+                            <el-input v-model="form.deptCode" placeholder="请输入部门编号" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
+                        <el-form-item label="部门名称" prop="deptName">
+                            <el-input v-model="form.deptName" placeholder="请输入部门名称" />
+                        </el-form-item>
+                    </el-col>
+                    <el-col :span="12">
                         <el-form-item label="显示排序" prop="orderNum">
                             <el-input-number v-model="form.orderNum" controls-position="right" :min="0" />
                         </el-form-item>
@@ -148,6 +158,7 @@ const data = reactive<{
     rules: {
         parentId: [{ required: true, message: '上级部门不能为空', trigger: 'blur' }],
         deptName: [{ required: true, message: '部门名称不能为空', trigger: 'blur' }],
+        deptCode: [{ required: true, message: '部门名称不能为空', trigger: 'blur' }],
         orderNum: [{ required: true, message: '显示排序不能为空', trigger: 'blur' }],
         email: [{ type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }],
         phone: [
@@ -177,6 +188,7 @@ function reset() {
         deptId: undefined,
         parentId: undefined,
         deptName: undefined,
+        deptCode: undefined,
         orderNum: 0,
         leader: undefined,
         phone: undefined,
