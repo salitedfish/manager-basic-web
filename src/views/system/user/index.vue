@@ -240,24 +240,25 @@
                                     @click="handleResetPwd(scope.row)"
                                 ></el-button>
                             </el-tooltip>
-                            <el-tooltip v-if="scope.row.userId !== 1" content="分配角色" placement="top">
-                                <el-button
-                                    v-hasPermi="['system:user:edit']"
-                                    link
-                                    type="primary"
-                                    icon="CircleCheck"
-                                    @click="handleAuthRole(scope.row)"
-                                ></el-button>
-                            </el-tooltip>
                             <el-tooltip v-if="scope.row.userId !== 1" content="分配业务权限" placement="top">
                                 <el-button
-                                    v-hasPermi="['system:business:edit']"
+                                    v-hasPermi="['system:authUserBusiness:list']"
                                     link
                                     type="primary"
                                     icon="Position"
                                     @click="handleAuthBusiness(scope.row)"
                                 ></el-button>
                             </el-tooltip>
+                            <el-tooltip v-if="scope.row.userId !== 1" content="分配角色" placement="top">
+                                <el-button
+                                    v-hasPermi="['system:authUserRole:list']"
+                                    link
+                                    type="primary"
+                                    icon="CircleCheck"
+                                    @click="handleAuthRole(scope.row)"
+                                ></el-button>
+                            </el-tooltip>
+
                         </template>
                     </el-table-column>
                 </el-table>

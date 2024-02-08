@@ -16,11 +16,11 @@
             <el-tab-pane label="分配部门" name="0">
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
-                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:role:add']" type="primary" plain icon="Plus"
+                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:subAdmin:add']" type="primary" plain icon="Plus"
                             @click="openSelectUser">添加</el-button>
                     </el-col>
                     <el-col :span="1.5">
-                        <el-button v-hasPermi="['system:role:remove']" type="danger" plain icon="CircleClose"
+                        <el-button v-hasPermi="['system:subAdmin:remove']" type="danger" plain icon="CircleClose"
                             :disabled="multiple" @click="cancelAuthUserAll">批量取消授权</el-button>
                     </el-col>
                     <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
@@ -43,7 +43,7 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template #default="scope">
-                            <el-button v-hasPermi="['system:role:remove']" link type="primary" icon="CircleClose"
+                            <el-button v-hasPermi="['system:subAdmin:remove']" link type="primary" icon="CircleClose"
                                 @click="cancelAuthUser(scope.row)">取消授权</el-button>
                         </template>
                     </el-table-column>
@@ -55,11 +55,11 @@
             <el-tab-pane label="分配角色" name="1">
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
-                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:role:add']" type="primary" plain
+                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:subAdmin:add']" type="primary" plain
                             icon="Plus" @click="openSelectUser">添加</el-button>
                     </el-col>
                     <el-col :span="1.5">
-                        <el-button v-hasPermi="['system:role:remove']" type="danger" plain icon="CircleClose"
+                        <el-button v-hasPermi="['system:subAdmin:remove']" type="danger" plain icon="CircleClose"
                             :disabled="multiple" @click="cancelAuthUserAll">批量取消授权</el-button>
                     </el-col>
                     <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
@@ -82,7 +82,7 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template #default="scope">
-                            <el-button v-hasPermi="['system:role:remove']" link type="primary" icon="CircleClose"
+                            <el-button v-hasPermi="['system:subAdmin:remove']" link type="primary" icon="CircleClose"
                                 @click="cancelAuthUser(scope.row)">取消授权</el-button>
                         </template>
                     </el-table-column>
@@ -94,11 +94,11 @@
             <el-tab-pane label="分配岗位" name="2">
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
-                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:role:add']" type="primary" plain icon="Plus"
+                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:subAdmin:add']" type="primary" plain icon="Plus"
                             @click="openSelectUser">添加</el-button>
                     </el-col>
                     <el-col :span="1.5">
-                        <el-button v-hasPermi="['system:role:remove']" type="danger" plain icon="CircleClose"
+                        <el-button v-hasPermi="['system:subAdmin:remove']" type="danger" plain icon="CircleClose"
                             :disabled="multiple" @click="cancelAuthUserAll">批量取消授权</el-button>
                     </el-col>
                     <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
@@ -120,7 +120,7 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template #default="scope">
-                            <el-button v-hasPermi="['system:role:remove']" link type="primary" icon="CircleClose"
+                            <el-button v-hasPermi="['system:subAdmin:remove']" link type="primary" icon="CircleClose"
                                 @click="cancelAuthUser(scope.row)">取消授权</el-button>
                         </template>
                     </el-table-column>
@@ -132,11 +132,11 @@
             <el-tab-pane label="业务权限" name="3">
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
-                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:role:add']" type="primary" plain icon="Plus"
+                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:subAdmin:add']" type="primary" plain icon="Plus"
                             @click="openSelectUser">添加</el-button>
                     </el-col>
                     <el-col :span="1.5">
-                        <el-button v-hasPermi="['system:role:remove']" type="danger" plain icon="CircleClose"
+                        <el-button v-hasPermi="['system:subAdmin:remove']" type="danger" plain icon="CircleClose"
                             :disabled="multiple" @click="cancelAuthUserAll">批量取消授权</el-button>
                     </el-col>
                     <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
@@ -158,7 +158,7 @@
                     </el-table-column> -->
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template #default="scope">
-                            <el-button v-hasPermi="['system:role:remove']" link type="primary" icon="CircleClose"
+                            <el-button v-hasPermi="['system:subAdmin:remove']" link type="primary" icon="CircleClose"
                                 @click="cancelAuthUser(scope.row)">取消授权</el-button>
                         </template>
                     </el-table-column>

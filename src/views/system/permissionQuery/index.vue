@@ -39,7 +39,7 @@
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
                     <el-button
-                        v-hasPermi="['system:permissionQuery:remove']"
+                        v-hasPermi="['system:noticepermissionQuery:remove']"
                         link
                         type="primary"
                         icon="CircleClose"

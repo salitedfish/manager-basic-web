@@ -87,7 +87,7 @@
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
                         <el-button
-                            v-hasPermi="['system:user:add']"
+                            v-hasPermi="['system:subUser:add']"
                             type="primary"
                             plain
                             icon="Plus"
@@ -97,7 +97,7 @@
                     </el-col>
                     <el-col :span="1.5">
                         <el-button
-                            v-hasPermi="['system:user:edit']"
+                            v-hasPermi="['system:subUser:edit']"
                             type="success"
                             plain
                             icon="Edit"
@@ -108,7 +108,7 @@
                     </el-col>
                     <el-col :span="1.5">
                         <el-button
-                            v-hasPermi="['system:user:remove']"
+                            v-hasPermi="['system:subUser:remove']"
                             type="danger"
                             plain
                             icon="Delete"
@@ -119,7 +119,7 @@
                     </el-col>
                     <el-col :span="1.5">
                         <el-button
-                            v-hasPermi="['system:user:import']"
+                            v-hasPermi="['system:subUser:import']"
                             type="info"
                             plain
                             icon="Upload"
@@ -129,7 +129,7 @@
                     </el-col>
                     <el-col :span="1.5">
                         <el-button
-                            v-hasPermi="['system:user:export']"
+                            v-hasPermi="['system:subUser:export']"
                             type="warning"
                             plain
                             icon="Download"
@@ -215,7 +215,7 @@
                         <template #default="scope">
                             <el-tooltip v-if="scope.row.userId !== 1" content="修改" placement="top">
                                 <el-button
-                                    v-hasPermi="['system:user:edit']"
+                                    v-hasPermi="['system:subUser:edit']"
                                     link
                                     type="primary"
                                     icon="Edit"
@@ -224,7 +224,7 @@
                             </el-tooltip>
                             <el-tooltip v-if="scope.row.userId !== 1" content="删除" placement="top">
                                 <el-button
-                                    v-hasPermi="['system:user:remove']"
+                                    v-hasPermi="['system:subUser:remove']"
                                     link
                                     type="primary"
                                     icon="Delete"
@@ -233,7 +233,7 @@
                             </el-tooltip>
                             <el-tooltip v-if="scope.row.userId !== 1" content="重置密码" placement="top">
                                 <el-button
-                                    v-hasPermi="['system:user:resetPwd']"
+                                    v-hasPermi="['system:subUser:resetPwd']"
                                     link
                                     type="primary"
                                     icon="Key"
@@ -242,7 +242,7 @@
                             </el-tooltip>
                             <el-tooltip v-if="scope.row.userId !== 1" content="分配角色" placement="top">
                                 <el-button
-                                    v-hasPermi="['system:user:edit']"
+                                    v-hasPermi="['system:authSubUserRole:list']"
                                     link
                                     type="primary"
                                     icon="CircleCheck"
@@ -251,7 +251,7 @@
                             </el-tooltip>
                             <el-tooltip v-if="scope.row.userId !== 1" content="分配业务权限" placement="top">
                                 <el-button
-                                    v-hasPermi="['system:business:edit']"
+                                    v-hasPermi="['system:authSubUserBusiness:list']"
                                     link
                                     type="primary"
                                     icon="Position"

@@ -19,7 +19,7 @@
 
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
-                <el-button v-hasPermi="['system:dept:add']" type="primary" plain icon="Plus"
+                <el-button v-hasPermi="['system:subDept:add']" type="primary" plain icon="Plus"
                     @click="handleAdd">新增</el-button>
             </el-col>
             <el-col :span="1.5">
@@ -44,15 +44,15 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
-                    <el-button v-hasPermi="['system:dept:edit']" link type="primary" icon="Edit"
+                    <el-button v-hasPermi="['system:subDept:edit']" link type="primary" icon="Edit"
                         @click="handleUpdate(scope.row)">修改</el-button>
-                    <el-button v-hasPermi="['system:dept:add']" link type="primary" icon="Plus"
+                    <el-button v-hasPermi="['system:subDept:add']" link type="primary" icon="Plus"
                         @click="handleAdd(scope.row)">新增</el-button>
-                    <el-button v-hasPermi="['system:dept:add']" link type="primary" icon="Position"
+                    <el-button v-hasPermi="['system:authSubDeptBusiness:list']" link type="primary" icon="Position"
                         @click="handleAuthBusiness(scope.row)">分配业务权限</el-button>
                     <el-button v-hasPermi="['system:role:edit']" link type="primary" icon="User"
                         @click="handleAuthUser(scope.row)">分配角色</el-button>
-                    <el-button v-if="scope.row.parentId != 0" v-hasPermi="['system:dept:remove']" link type="primary"
+                    <el-button v-if="scope.row.parentId != 0" v-hasPermi="['system:authSubDeptRole:list']" link type="primary"
                         icon="Delete" @click="handleDelete(scope.row)">删除</el-button>
                 </template>
             </el-table-column>

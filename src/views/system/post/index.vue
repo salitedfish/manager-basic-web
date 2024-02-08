@@ -61,9 +61,9 @@
                 <template #default="scope">
                     <el-button v-hasPermi="['system:post:edit']" link type="primary" icon="Edit"
                         @click="handleUpdate(scope.row)">修改</el-button>
-                    <el-button v-hasPermi="['system:dept:add']" link type="primary" icon="Position"
+                    <el-button v-hasPermi="['system:authPostBusiness:list']" link type="primary" icon="Position"
                         @click="handleAuthBusiness(scope.row)">分配业务权限</el-button>
-                    <el-button v-hasPermi="['system:role:edit']" link type="primary" icon="User"
+                    <el-button v-hasPermi="['system:authPostRole:list']" link type="primary" icon="User"
                         @click="handleAuthUser(scope.row)">分配角色</el-button>
                     <el-button v-hasPermi="['system:post:remove']" link type="primary" icon="Delete"
                         @click="handleDelete(scope.row)">删除</el-button>
