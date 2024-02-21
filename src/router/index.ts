@@ -110,7 +110,7 @@ export const dynamicRoutes : RouteRecordRaw[]= [
         path: '/system/user-auth',
         component: Layout,
         hidden: true,
-        permissions: ['system:user:edit'],
+        // permissions: ['system:user:edit'],
         children: [
             {
                 path: 'authRole',
@@ -124,7 +124,7 @@ export const dynamicRoutes : RouteRecordRaw[]= [
         path: '/system/role-auth',
         component: Layout,
         hidden: true,
-        permissions: ['system:role:edit'],
+        // permissions: ['system:role:edit'],
         children: [
             {
                 path: 'user/:roleId(\\d+)',
@@ -140,7 +140,7 @@ export const dynamicRoutes : RouteRecordRaw[]= [
         path: '/system/business-auth',
         component: Layout,
         hidden: true,
-        permissions: ['system:business:edit'],
+        // permissions: ['system:business:edit'],
         children: [
             {
                 path: 'business',
@@ -154,7 +154,7 @@ export const dynamicRoutes : RouteRecordRaw[]= [
         path: '/system/dept-user-auth',
         component: Layout,
         hidden: true,
-        permissions: ['system:deptUser:edit'],
+        // permissions: ['system:deptUser:edit'],
         children: [
             {
                 path: 'deptUser',
@@ -168,7 +168,7 @@ export const dynamicRoutes : RouteRecordRaw[]= [
         path: '/system/post-user-auth',
         component: Layout,
         hidden: true,
-        permissions: ['system:postUser:edit'],
+        // permissions: ['system:postUser:edit'],
         children: [
             {
                 path: 'postUser',
