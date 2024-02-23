@@ -8,12 +8,22 @@
 
         <el-form v-show="showSearch" ref="queryRef" :model="queryParams" :inline="true">
             <el-form-item label="角色编码" prop="roleKey">
-                <el-input v-model="queryParams.roleKey" placeholder="请输入角色编码" clearable style="width: 240px"
-                    @keyup.enter="handleQuery" />
+                <el-input
+                    v-model="queryParams.roleKey"
+                    placeholder="请输入角色编码"
+                    clearable
+                    style="width: 240px"
+                    @keyup.enter="handleQuery"
+                />
             </el-form-item>
             <el-form-item label="角色名称" prop="roleName">
-                <el-input v-model="queryParams.roleName" placeholder="请输入角色名称" clearable style="width: 240px"
-                    @keyup.enter="handleQuery" />
+                <el-input
+                    v-model="queryParams.roleName"
+                    placeholder="请输入角色名称"
+                    clearable
+                    style="width: 240px"
+                    @keyup.enter="handleQuery"
+                />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -23,12 +33,25 @@
 
         <el-row :gutter="10" class="mb8">
             <el-col :span="1.5">
-                <el-button v-hasPermi="['system:role:add']" type="primary" plain icon="Plus"
-                    @click="openSelectUser">添加</el-button>
+                <el-button
+                    v-hasPermi="['system:role:add']"
+                    type="primary"
+                    plain
+                    icon="Plus"
+                    @click="openSelectUser"
+                    >添加</el-button
+                >
             </el-col>
             <el-col :span="1.5">
-                <el-button v-hasPermi="['system:role:remove']" type="danger" plain icon="CircleClose" :disabled="multiple"
-                    @click="cancelAuthUserAll">批量取消授权</el-button>
+                <el-button
+                    v-hasPermi="['system:role:remove']"
+                    type="danger"
+                    plain
+                    icon="CircleClose"
+                    :disabled="multiple"
+                    @click="cancelAuthUserAll"
+                    >批量取消授权</el-button
+                >
             </el-col>
             <el-col :span="1.5">
                 <el-button type="warning" plain icon="Close" @click="handleClose">关闭</el-button>
@@ -54,15 +77,33 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
-                    <el-button v-hasPermi="['system:role:remove']" link type="primary" icon="CircleClose"
-                        @click="cancelAuthUser(scope.row)">取消授权</el-button>
+                    <el-tooltip content="取消授权" placement="top">
+                    <el-button
+                        v-hasPermi="['system:role:remove']"
+                        link
+                        type="primary"
+                        icon="CircleClose"
+                        @click="cancelAuthUser(scope.row)"
+                        ></el-button
+                    >
+                </el-tooltip>
                 </template>
             </el-table-column>
         </el-table>
 
-        <pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
-            :total="total" @pagination="getList" />
-        <select-role ref="selectRef" :deptId="queryParams.deptId" @ok="handleAddDeptRole" :subAdmin="queryParams.subAdmin"/>
+        <pagination
+            v-show="total > 0"
+            v-model:page="queryParams.pageNum"
+            v-model:limit="queryParams.pageSize"
+            :total="total"
+            @pagination="getList"
+        />
+        <select-role
+            ref="selectRef"
+            :deptId="queryParams.deptId"
+            @ok="handleAddDeptRole"
+            :subAdmin="queryParams.subAdmin"
+        />
     </div>
 </template>
 
@@ -98,7 +139,7 @@ const queryParams = reactive<{
     deptId: route.query.Id,
     roleName: undefined,
     roleKey: undefined,
-    subAdmin: route.query.subAdmin?route.query.subAdmin:undefined,
+    subAdmin: route.query.subAdmin ? route.query.subAdmin : undefined,
 });
 
 /** 查询授权角色列表 */
@@ -112,10 +153,10 @@ function getList() {
 }
 // 返回按钮
 function handleClose() {
-    let obj
-    if(queryParams.subAdmin=='true'){
+    let obj;
+    if (queryParams.subAdmin == 'true') {
         obj = { path: '/system/subAdminDept' };
-    }else{
+    } else {
         obj = { path: '/system/dept' };
     }
 
@@ -129,12 +170,12 @@ function handleQuery() {
 
 //添加角色
 async function handleAddDeptRole(roleIds: any) {
-    const params={
-        roleIds:roleIds,
-        deptId:route.query.Id,
-        subAdmin:true
-    }
-    await addDeptRole(params)
+    const params = {
+        roleIds: roleIds,
+        deptId: route.query.Id,
+        subAdmin: true,
+    };
+    await addDeptRole(params);
     queryParams.pageNum = 1;
     getList();
 }
@@ -195,4 +236,3 @@ getList();
     color: var(--el-text-color-regular);
 }
 </style>
-

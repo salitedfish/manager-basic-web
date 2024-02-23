@@ -146,13 +146,13 @@
 
                 <el-table v-loading="loading" :data="userList" @selectionChange="handleSelectionChange">
                     <el-table-column type="selection" width="50" align="center" />
-                    <el-table-column
+                    <!-- <el-table-column
                         v-if="columns[0].visible"
                         key="userId"
                         label="用户编号"
                         align="center"
                         prop="userId"
-                    />
+                    /> -->
                     <el-table-column
                         v-if="columns[1].visible"
                         key="userName"
@@ -164,7 +164,7 @@
                     <el-table-column
                         v-if="columns[2].visible"
                         key="nickName"
-                        label="用户昵称"
+                        label="姓名"
                         align="center"
                         prop="nickName"
                         :show-overflow-tooltip="true"
@@ -277,8 +277,8 @@
             <el-form ref="userRef" :model="form" :rules="rules" label-width="80px">
                 <el-row>
                     <el-col :span="12">
-                        <el-form-item label="用户昵称" prop="nickName">
-                            <el-input v-model="form.nickName" placeholder="请输入用户昵称" maxlength="30" />
+                        <el-form-item label="姓名" prop="nickName">
+                            <el-input v-model="form.nickName" placeholder="请输入姓名" maxlength="30" />
                         </el-form-item>
                     </el-col>
                     <el-col :span="12">
@@ -501,7 +501,7 @@ const upload = reactive({
 const columns = ref([
     { key: 0, label: `用户编号`, visible: true },
     { key: 1, label: `用户名称`, visible: true },
-    { key: 2, label: `用户昵称`, visible: true },
+    { key: 2, label: `姓名`, visible: true },
     { key: 3, label: `部门`, visible: true },
     { key: 4, label: `手机号码`, visible: true },
     { key: 5, label: `状态`, visible: true },
@@ -527,7 +527,7 @@ const data = reactive<{
             { required: true, message: '用户名称不能为空', trigger: 'blur' },
             { min: 2, max: 20, message: '用户名称长度必须介于 2 和 20 之间', trigger: 'blur' },
         ],
-        nickName: [{ required: true, message: '用户昵称不能为空', trigger: 'blur' }],
+        nickName: [{ required: true, message: '姓名不能为空', trigger: 'blur' }],
         password: [
             { required: true, message: '用户密码不能为空', trigger: 'blur' },
             { min: 5, max: 20, message: '用户密码长度必须介于 5 和 20 之间', trigger: 'blur' },

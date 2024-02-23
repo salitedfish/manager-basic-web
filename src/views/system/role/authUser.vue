@@ -56,7 +56,7 @@
         <el-table v-loading="loading" :data="userList" @selectionChange="handleSelectionChange">
             <el-table-column type="selection" width="55" align="center" />
             <el-table-column label="用户名称" prop="userName" :show-overflow-tooltip="true" />
-            <el-table-column label="用户昵称" prop="nickName" :show-overflow-tooltip="true" />
+            <el-table-column label="姓名" prop="nickName" :show-overflow-tooltip="true" />
             <el-table-column label="邮箱" prop="email" :show-overflow-tooltip="true" />
             <el-table-column label="手机" prop="phonenumber" :show-overflow-tooltip="true" />
             <el-table-column label="状态" align="center" prop="status">
@@ -71,14 +71,15 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
+                    <el-tooltip content="取消授权" placement="top">
                     <el-button
                         v-hasPermi="['system:role:remove']"
                         link
                         type="primary"
                         icon="CircleClose"
                         @click="cancelAuthUser(scope.row)"
-                        >取消授权</el-button
-                    >
+                        ></el-button
+                    ></el-tooltip>
                 </template>
             </el-table-column>
         </el-table>

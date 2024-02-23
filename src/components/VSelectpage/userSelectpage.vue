@@ -18,7 +18,7 @@ const data: any = reactive({
 const emit = defineEmits(['ok']);
 const columns: SelectPageTableColumn[] =  [
     { title: '用户名称', data: 'userName'},
-    { title: '用户昵称', data: 'nickName' },
+    { title: '姓名', data: 'nickName' },
     { title: '部门',  data: (row: { dept: { deptName: any; }; }) => `${row.dept?.deptName}` }
 ]
 function fetchData(data: PageParameters, callback: FetchDataCallback) {

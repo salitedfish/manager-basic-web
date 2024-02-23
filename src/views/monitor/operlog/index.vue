@@ -160,14 +160,15 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
+                    <el-tooltip content="详细" placement="top">
                     <el-button
                         v-hasPermi="['monitor:operlog:query']"
                         link
                         type="primary"
                         icon="View"
                         @click="handleView(scope.row, scope.index)"
-                        >详细</el-button
-                    >
+                        ></el-button
+                    ></el-tooltip>
                 </template>
             </el-table-column>
         </el-table>

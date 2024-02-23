@@ -111,7 +111,12 @@
                 :show-overflow-tooltip="true"
             />
             <el-table-column label="参数键名" align="center" prop="configKey" :show-overflow-tooltip="true" />
-            <el-table-column label="参数键值" align="center" prop="configValue" :show-overflow-tooltip="true" />
+            <el-table-column
+                label="参数键值"
+                align="center"
+                prop="configValue"
+                :show-overflow-tooltip="true"
+            />
             <el-table-column label="系统内置" align="center" prop="configType">
                 <template #default="scope">
                     <dict-tag :options="sys_yes_no" :value="scope.row.configType" />
@@ -125,22 +130,24 @@
             </el-table-column>
             <el-table-column label="操作" align="center" width="150" class-name="small-padding fixed-width">
                 <template #default="scope">
-                    <el-button
-                        v-hasPermi="['system:config:edit']"
-                        link
-                        type="primary"
-                        icon="Edit"
-                        @click="handleUpdate(scope.row)"
-                        >修改</el-button
-                    >
-                    <el-button
-                        v-hasPermi="['system:config:remove']"
-                        link
-                        type="primary"
-                        icon="Delete"
-                        @click="handleDelete(scope.row)"
-                        >删除</el-button
-                    >
+                    <el-tooltip content="修改" placement="top">
+                        <el-button
+                            v-hasPermi="['system:config:edit']"
+                            link
+                            type="primary"
+                            icon="Edit"
+                            @click="handleUpdate(scope.row)"
+                        ></el-button
+                    ></el-tooltip>
+                    <el-tooltip content="删除" placement="top">
+                        <el-button
+                            v-hasPermi="['system:config:remove']"
+                            link
+                            type="primary"
+                            icon="Delete"
+                            @click="handleDelete(scope.row)"
+                        ></el-button
+                    ></el-tooltip>
                 </template>
             </el-table-column>
         </el-table>

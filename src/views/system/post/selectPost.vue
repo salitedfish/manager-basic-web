@@ -63,7 +63,6 @@ import { listPost } from '@/api/system/post';
 import { parseTime } from '@/utils/ruoyi';
 import { getCurrentInstance, ComponentInternalInstance, ref, reactive } from 'vue';
 
-
 const { proxy } = getCurrentInstance() as ComponentInternalInstance;
 
 const { sys_normal_disable } = proxy!.useDict('sys_normal_disable');
@@ -127,7 +126,7 @@ function handleSelectUser() {
         return;
     }
     visible.value = false;
-    emit('ok',postIds.value);
+    emit('ok', postIds.value);
 }
 
 defineExpose({

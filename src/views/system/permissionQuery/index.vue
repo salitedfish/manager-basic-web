@@ -24,7 +24,7 @@
         </el-form>
         <el-table v-loading="loading" :data="userList" @selectionChange="handleSelectionChange">
             <el-table-column type="selection" width="55" align="center" />
-            <el-table-column label="权限主体编码" prop="manageOrgId" :show-overflow-tooltip="true" />
+            <!-- <el-table-column label="权限主体编码" prop="manageOrgId" :show-overflow-tooltip="true" /> -->
             <el-table-column label="权限主体名称" prop="orgName" :show-overflow-tooltip="true" />
             <el-table-column label="业务权限名称" prop="businessName" :show-overflow-tooltip="true" />
             <el-table-column label="管理组织编码" prop="manageOrgCode" :show-overflow-tooltip="true" />
@@ -38,14 +38,15 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
+                    <el-tooltip content="取消授权" placement="top">
                     <el-button
                         v-hasPermi="['system:noticepermissionQuery:remove']"
                         link
                         type="primary"
                         icon="CircleClose"
                         @click="cancelAuthUser(scope.row)"
-                        >取消授权</el-button
-                    >
+                        ></el-button
+                    ></el-tooltip>
                 </template>
             </el-table-column>
         </el-table>

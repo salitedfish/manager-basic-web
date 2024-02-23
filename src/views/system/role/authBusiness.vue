@@ -1,10 +1,14 @@
 <template>
     <div class="app-container">
         <el-form v-show="showSearch" ref="queryRef" :model="queryParams" :inline="true">
-            <el-form-item label="业务权限名称" >
-             <el-select v-model="queryParams.businessId" clearable filterable placeholder="请选择">
-                    <el-option v-for="item in businessList" :key="item.businessId" :label="item.businessName"
-                        :value="item.businessId" ></el-option>
+            <el-form-item label="业务权限名称">
+                <el-select v-model="queryParams.businessId" clearable filterable placeholder="请选择">
+                    <el-option
+                        v-for="item in businessList"
+                        :key="item.businessId"
+                        :label="item.businessName"
+                        :value="item.businessId"
+                    ></el-option>
                 </el-select>
             </el-form-item>
             <el-form-item>
@@ -43,7 +47,7 @@
 
         <el-table v-loading="loading" :data="userList" @selectionChange="handleSelectionChange">
             <el-table-column type="selection" width="55" align="center" />
-            <el-table-column label="权限主体编码" prop="manageOrgId" :show-overflow-tooltip="true" />
+            <!-- <el-table-column label="权限主体编码" prop="manageOrgId" :show-overflow-tooltip="true" /> -->
             <el-table-column label="权限主体名称" prop="orgName" :show-overflow-tooltip="true" />
             <!-- <el-table-column label="权限主体类型" prop="email" :show-overflow-tooltip="true" /> -->
             <el-table-column label="业务权限名称" prop="businessName" :show-overflow-tooltip="true" />
@@ -64,14 +68,15 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
-                    <el-button
-                        v-hasPermi="['system:business:remove']"
-                        link
-                        type="primary"
-                        icon="CircleClose"
-                        @click="cancelAuthUser(scope.row)"
-                        >取消授权</el-button
-                    >
+                    <el-tooltip content="取消授权" placement="top">
+                        <el-button
+                            v-hasPermi="['system:business:remove']"
+                            link
+                            type="primary"
+                            icon="CircleClose"
+                            @click="cancelAuthUser(scope.row)"
+                        ></el-button
+                    ></el-tooltip>
                 </template>
             </el-table-column>
         </el-table>
@@ -84,9 +89,13 @@
             @pagination="getList"
         />
 
-        <select-business ref="selectRef"
-        :orgId="queryParams.orgId" :orgType="queryParams.orgType" :subAdmin="queryParams.subAdmin"
-        @ok="handleQuery" />
+        <select-business
+            ref="selectRef"
+            :orgId="queryParams.orgId"
+            :orgType="queryParams.orgType"
+            :subAdmin="queryParams.subAdmin"
+            @ok="handleQuery"
+        />
     </div>
 </template>
 
@@ -110,13 +119,13 @@ const showSearch = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const userIds = ref<any[]>([]);
-const closeOjb=[
-{ path: '/system/dept' },
-{ path: '/system/user' },
-{ path: '/system/post' },
-{ path: '/system/subAdminUser' },
-{ path: '/system/subAdminDept' },
-]
+const closeOjb = [
+    { path: '/system/dept' },
+    { path: '/system/user' },
+    { path: '/system/post' },
+    { path: '/system/subAdminUser' },
+    { path: '/system/subAdminDept' },
+];
 const queryParams = reactive<{
     pageNum: number;
     pageSize: number;
@@ -129,7 +138,7 @@ const queryParams = reactive<{
     pageSize: 10,
     orgId: route.query.orgId,
     orgType: route.query.orgType,
-    subAdmin: route.query.subAdmin?route.query.subAdmin:undefined,
+    subAdmin: route.query.subAdmin ? route.query.subAdmin : undefined,
     businessId: undefined,
 });
 
@@ -144,12 +153,12 @@ function getList() {
 }
 // 返回按钮
 function handleClose() {
-    let obj
-    if(queryParams.orgType ==1 && queryParams.subAdmin=='true'){
+    let obj;
+    if (queryParams.orgType == 1 && queryParams.subAdmin == 'true') {
         obj = closeOjb[3];
-    }else if(queryParams.orgType ==0 && queryParams.subAdmin=='true'){
+    } else if (queryParams.orgType == 0 && queryParams.subAdmin == 'true') {
         obj = closeOjb[4];
-    }else{
+    } else {
         obj = closeOjb[queryParams.orgType];
     }
 
@@ -208,9 +217,11 @@ function cancelAuthUserAll(row: any) {
 
 /** 查询业务权限 */
 function getBusinessList() {
-    listBusiness({subAdmin:route.query.subAdmin?route.query.subAdmin:undefined}).then((response: any) => {
-        businessList.value = response.rows;
-    });
+    listBusiness({ subAdmin: route.query.subAdmin ? route.query.subAdmin : undefined }).then(
+        (response: any) => {
+            businessList.value = response.rows;
+        }
+    );
 }
 getList();
 getBusinessList();

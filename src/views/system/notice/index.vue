@@ -20,7 +20,12 @@
                 />
             </el-form-item>
             <el-form-item label="类型" prop="noticeType">
-                <el-select v-model="queryParams.noticeType" placeholder="公告类型" clearable style="width: 200px">
+                <el-select
+                    v-model="queryParams.noticeType"
+                    placeholder="公告类型"
+                    clearable
+                    style="width: 200px"
+                >
                     <el-option
                         v-for="dict in sys_notice_type"
                         :key="dict.value"
@@ -98,22 +103,24 @@
             </el-table-column>
             <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                 <template #default="scope">
-                    <el-button
-                        v-hasPermi="['system:notice:edit']"
-                        link
-                        type="primary"
-                        icon="Edit"
-                        @click="handleUpdate(scope.row)"
-                        >修改</el-button
-                    >
-                    <el-button
-                        v-hasPermi="['system:notice:remove']"
-                        link
-                        type="primary"
-                        icon="Delete"
-                        @click="handleDelete(scope.row)"
-                        >删除</el-button
-                    >
+                    <el-tooltip content="修改" placement="top">
+                        <el-button
+                            v-hasPermi="['system:notice:edit']"
+                            link
+                            type="primary"
+                            icon="Edit"
+                            @click="handleUpdate(scope.row)"
+                        ></el-button
+                    ></el-tooltip>
+                    <el-tooltip content="删除" placement="top">
+                        <el-button
+                            v-hasPermi="['system:notice:remove']"
+                            link
+                            type="primary"
+                            icon="Delete"
+                            @click="handleDelete(scope.row)"
+                        ></el-button
+                    ></el-tooltip>
                 </template>
             </el-table-column>
         </el-table>
@@ -161,7 +168,7 @@
                     </el-col>
                     <el-col :span="24">
                         <el-form-item label="内容">
-                            <editor v-model="form.noticeContent" :min-height="192"/>
+                            <editor v-model="form.noticeContent" :min-height="192" />
                         </el-form-item>
                     </el-col>
                 </el-row>

@@ -5,7 +5,12 @@
                 <user-selectpage :Id="queryParams.userId" style="width: 240px" @ok="selectedUser" />
             </el-form-item>
             <el-form-item label="用户部门" prop="deptName">
-                <el-input v-model="queryParams.deptName" placeholder="人员选择后自动带出" style="width: 240px" readonly />
+                <el-input
+                    v-model="queryParams.deptName"
+                    placeholder="人员选择后自动带出"
+                    style="width: 240px"
+                    readonly
+                />
             </el-form-item>
             <el-form-item>
                 <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -16,12 +21,26 @@
             <el-tab-pane label="分配部门" name="0">
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
-                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:subAdmin:add']" type="primary" plain icon="Plus"
-                            @click="openSelectUser">添加</el-button>
+                        <el-button
+                            :disabled="!queryParams.userId"
+                            v-hasPermi="['system:subAdmin:add']"
+                            type="primary"
+                            plain
+                            icon="Plus"
+                            @click="openSelectUser"
+                            >添加</el-button
+                        >
                     </el-col>
                     <el-col :span="1.5">
-                        <el-button v-hasPermi="['system:subAdmin:remove']" type="danger" plain icon="CircleClose"
-                            :disabled="multiple" @click="cancelAuthUserAll">批量取消授权</el-button>
+                        <el-button
+                            v-hasPermi="['system:subAdmin:remove']"
+                            type="danger"
+                            plain
+                            icon="CircleClose"
+                            :disabled="multiple"
+                            @click="cancelAuthUserAll"
+                            >批量取消授权</el-button
+                        >
                     </el-col>
                     <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
                 </el-row>
@@ -43,24 +62,50 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template #default="scope">
-                            <el-button v-hasPermi="['system:subAdmin:remove']" link type="primary" icon="CircleClose"
-                                @click="cancelAuthUser(scope.row)">取消授权</el-button>
+                            <el-tooltip content="取消授权" placement="top">
+                                <el-button
+                                    v-hasPermi="['system:subAdmin:remove']"
+                                    link
+                                    type="primary"
+                                    icon="CircleClose"
+                                    @click="cancelAuthUser(scope.row)"
+                                ></el-button
+                            ></el-tooltip>
                         </template>
                     </el-table-column>
                 </el-table>
-                <pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
-                    :total="total" @pagination="getList" />
+                <pagination
+                    v-show="total > 0"
+                    v-model:page="queryParams.pageNum"
+                    v-model:limit="queryParams.pageSize"
+                    :total="total"
+                    @pagination="getList"
+                />
                 <select-user ref="selectRef" :roleId="queryParams.roleId" @ok="handleQuery" />
             </el-tab-pane>
             <el-tab-pane label="分配角色" name="1">
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
-                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:subAdmin:add']" type="primary" plain
-                            icon="Plus" @click="openSelectUser">添加</el-button>
+                        <el-button
+                            :disabled="!queryParams.userId"
+                            v-hasPermi="['system:subAdmin:add']"
+                            type="primary"
+                            plain
+                            icon="Plus"
+                            @click="openSelectUser"
+                            >添加</el-button
+                        >
                     </el-col>
                     <el-col :span="1.5">
-                        <el-button v-hasPermi="['system:subAdmin:remove']" type="danger" plain icon="CircleClose"
-                            :disabled="multiple" @click="cancelAuthUserAll">批量取消授权</el-button>
+                        <el-button
+                            v-hasPermi="['system:subAdmin:remove']"
+                            type="danger"
+                            plain
+                            icon="CircleClose"
+                            :disabled="multiple"
+                            @click="cancelAuthUserAll"
+                            >批量取消授权</el-button
+                        >
                     </el-col>
                     <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
                 </el-row>
@@ -82,24 +127,50 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template #default="scope">
-                            <el-button v-hasPermi="['system:subAdmin:remove']" link type="primary" icon="CircleClose"
-                                @click="cancelAuthUser(scope.row)">取消授权</el-button>
+                            <el-tooltip content="取消授权" placement="top">
+                                <el-button
+                                    v-hasPermi="['system:subAdmin:remove']"
+                                    link
+                                    type="primary"
+                                    icon="CircleClose"
+                                    @click="cancelAuthUser(scope.row)"
+                                ></el-button
+                            ></el-tooltip>
                         </template>
                     </el-table-column>
                 </el-table>
-                <pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
-                    :total="total" @pagination="getList" />
+                <pagination
+                    v-show="total > 0"
+                    v-model:page="queryParams.pageNum"
+                    v-model:limit="queryParams.pageSize"
+                    :total="total"
+                    @pagination="getList"
+                />
                 <select-user ref="selectRef" :roleId="queryParams.roleId" @ok="handleQuery" />
             </el-tab-pane>
             <el-tab-pane label="分配岗位" name="2">
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
-                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:subAdmin:add']" type="primary" plain icon="Plus"
-                            @click="openSelectUser">添加</el-button>
+                        <el-button
+                            :disabled="!queryParams.userId"
+                            v-hasPermi="['system:subAdmin:add']"
+                            type="primary"
+                            plain
+                            icon="Plus"
+                            @click="openSelectUser"
+                            >添加</el-button
+                        >
                     </el-col>
                     <el-col :span="1.5">
-                        <el-button v-hasPermi="['system:subAdmin:remove']" type="danger" plain icon="CircleClose"
-                            :disabled="multiple" @click="cancelAuthUserAll">批量取消授权</el-button>
+                        <el-button
+                            v-hasPermi="['system:subAdmin:remove']"
+                            type="danger"
+                            plain
+                            icon="CircleClose"
+                            :disabled="multiple"
+                            @click="cancelAuthUserAll"
+                            >批量取消授权</el-button
+                        >
                     </el-col>
                     <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
                 </el-row>
@@ -120,24 +191,50 @@
                     </el-table-column>
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template #default="scope">
-                            <el-button v-hasPermi="['system:subAdmin:remove']" link type="primary" icon="CircleClose"
-                                @click="cancelAuthUser(scope.row)">取消授权</el-button>
+                            <el-tooltip content="取消授权" placement="top">
+                                <el-button
+                                    v-hasPermi="['system:subAdmin:remove']"
+                                    link
+                                    type="primary"
+                                    icon="CircleClose"
+                                    @click="cancelAuthUser(scope.row)"
+                                ></el-button
+                            ></el-tooltip>
                         </template>
                     </el-table-column>
                 </el-table>
-                <pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
-                    :total="total" @pagination="getList" />
+                <pagination
+                    v-show="total > 0"
+                    v-model:page="queryParams.pageNum"
+                    v-model:limit="queryParams.pageSize"
+                    :total="total"
+                    @pagination="getList"
+                />
                 <select-user ref="selectRef" :roleId="queryParams.roleId" @ok="handleQuery" />
             </el-tab-pane>
             <el-tab-pane label="业务权限" name="3">
                 <el-row :gutter="10" class="mb8">
                     <el-col :span="1.5">
-                        <el-button :disabled="!queryParams.userId" v-hasPermi="['system:subAdmin:add']" type="primary" plain icon="Plus"
-                            @click="openSelectUser">添加</el-button>
+                        <el-button
+                            :disabled="!queryParams.userId"
+                            v-hasPermi="['system:subAdmin:add']"
+                            type="primary"
+                            plain
+                            icon="Plus"
+                            @click="openSelectUser"
+                            >添加</el-button
+                        >
                     </el-col>
                     <el-col :span="1.5">
-                        <el-button v-hasPermi="['system:subAdmin:remove']" type="danger" plain icon="CircleClose"
-                            :disabled="multiple" @click="cancelAuthUserAll">批量取消授权</el-button>
+                        <el-button
+                            v-hasPermi="['system:subAdmin:remove']"
+                            type="danger"
+                            plain
+                            icon="CircleClose"
+                            :disabled="multiple"
+                            @click="cancelAuthUserAll"
+                            >批量取消授权</el-button
+                        >
                     </el-col>
                     <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
                 </el-row>
@@ -158,13 +255,25 @@
                     </el-table-column> -->
                     <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
                         <template #default="scope">
-                            <el-button v-hasPermi="['system:subAdmin:remove']" link type="primary" icon="CircleClose"
-                                @click="cancelAuthUser(scope.row)">取消授权</el-button>
+                            <el-tooltip content="取消授权" placement="top">
+                                <el-button
+                                    v-hasPermi="['system:subAdmin:remove']"
+                                    link
+                                    type="primary"
+                                    icon="CircleClose"
+                                    @click="cancelAuthUser(scope.row)"
+                                ></el-button
+                            ></el-tooltip>
                         </template>
                     </el-table-column>
                 </el-table>
-                <pagination v-show="total > 0" v-model:page="queryParams.pageNum" v-model:limit="queryParams.pageSize"
-                    :total="total" @pagination="getList" />
+                <pagination
+                    v-show="total > 0"
+                    v-model:page="queryParams.pageNum"
+                    v-model:limit="queryParams.pageSize"
+                    :total="total"
+                    @pagination="getList"
+                />
                 <select-user ref="selectRef" :roleId="queryParams.roleId" @ok="handleQuery" />
                 <select-role ref="selectRoleRef" @ok="handleAddDeptRole" />
                 <select-post ref="selectPostRef" @ok="handleAddDeptRole" />
@@ -172,7 +281,6 @@
                 <select-dept ref="selectDeptRef" @ok="handleAddDeptRole" />
             </el-tab-pane>
         </el-tabs>
-
     </div>
 </template>
 
@@ -184,10 +292,18 @@ import selectPost from '../post/selectPost.vue';
 import selectBusPer from '../role/selectBusPer.vue';
 import selectDept from '../dept/selectDept.vue';
 import {
-    addSubAdminBusiness, delSubAdminBusiness, subAdminBusinessList,
-    addSubAdminDept, delSubAdminDept, subAdminDeptList,
-    addSubAdminPost, delSubAdminPost, subAdminPostList,
-    addSubAdminRole, delSubAdminRole, subAdminRoleList,
+    addSubAdminBusiness,
+    delSubAdminBusiness,
+    subAdminBusinessList,
+    addSubAdminDept,
+    delSubAdminDept,
+    subAdminDeptList,
+    addSubAdminPost,
+    delSubAdminPost,
+    subAdminPostList,
+    addSubAdminRole,
+    delSubAdminRole,
+    subAdminRoleList,
 } from '@/api/system/subAdmin';
 import userSelectpage from '@/components/VSelectpage/userSelectpage.vue';
 import { parseTime } from '@/utils/ruoyi';
@@ -209,8 +325,8 @@ const selIds = ref<any[]>([]);
 const listArry = [subAdminDeptList, subAdminRoleList, subAdminPostList, subAdminBusinessList];
 const delArry = [delSubAdminDept, delSubAdminRole, delSubAdminPost, delSubAdminBusiness];
 const addArry = [addSubAdminDept, addSubAdminRole, addSubAdminPost, addSubAdminBusiness];
-const selectArry = ["selectDeptRef", "selectRoleRef", "selectPostRef", "selectBusPerRef"];
-const IdArry = ["deptId", "roleId", "postId", "businessId"];
+const selectArry = ['selectDeptRef', 'selectRoleRef', 'selectPostRef', 'selectBusPerRef'];
+const IdArry = ['deptId', 'roleId', 'postId', 'businessId'];
 const queryParams = reactive<{
     pageNum: number;
     pageSize: number;
@@ -232,13 +348,12 @@ function selectedUser(val: any) {
     queryParams.userId = val[0]?.userId;
     queryParams.deptName = val[0]?.dept?.deptName;
     queryParams.deptId = val[0]?.dept?.deptId;
-
 }
 watch(
-  () => [activeId.value,queryParams.userId],
-  () => {
-    getList()
-  }
+    () => [activeId.value, queryParams.userId],
+    () => {
+        getList();
+    }
 );
 /** 查询授权用户列表 */
 function getList() {
@@ -276,9 +391,9 @@ async function handleAddDeptRole(Ids: any) {
         postIds: Ids,
         businessIds: Ids,
         deptIds: Ids,
-        userId: queryParams.userId
-    }
-    await addArry[Number(activeId.value)](params)
+        userId: queryParams.userId,
+    };
+    await addArry[Number(activeId.value)](params);
     queryParams.pageNum = 1;
     getList();
 }
@@ -288,7 +403,11 @@ function cancelAuthUser(row: any) {
         .confirm('确认要取消该用户授权数据吗？')
         .then(function () {
             return delArry[Number(activeId.value)]({
-                userId: queryParams.userId, roleIds: [row.roleId], postIds: [row.postId], businessIds: [row.businessId], deptIds: [row.deptId]
+                userId: queryParams.userId,
+                roleIds: [row.roleId],
+                postIds: [row.postId],
+                businessIds: [row.businessId],
+                deptIds: [row.deptId],
             });
         })
         .then(() => {
@@ -305,7 +424,13 @@ function cancelAuthUserAll(row: any) {
     proxy!.$modal
         .confirm('是否取消选中用户授权数据项?')
         .then(function () {
-            return delArry[Number(activeId.value)]({ userId: queryParams.userId, roleIds: Ids, postIds: Ids, businessIds: Ids, deptIds: Ids });
+            return delArry[Number(activeId.value)]({
+                userId: queryParams.userId,
+                roleIds: Ids,
+                postIds: Ids,
+                businessIds: Ids,
+                deptIds: Ids,
+            });
         })
         .then(() => {
             getList();
